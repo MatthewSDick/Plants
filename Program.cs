@@ -34,6 +34,7 @@ namespace Plants
         Console.WriteLine(" (Plant) - Plant a new plant.");
         Console.WriteLine(" (Remove) - Remove a plant.");
         Console.WriteLine(" (Water) - Water a plant.");
+        Console.WriteLine(" (Need) - Plants that need watered.");
         Console.WriteLine(" (Thirsty) - View plants that have not been watered today.");
         Console.WriteLine(" (Location) - List plants by location.");
         Console.WriteLine(" (Quit) - Quit the application.");
@@ -81,6 +82,13 @@ namespace Plants
             var waterPlant = Console.ReadLine().ToLower();
             int plantToWater = verifyNumber(waterPlant);
             plantDatabase.WaterPlant(plantToWater);
+
+            // Water
+            //    This will update the plant's LastWateredDate to the Current Time. The user will select the plant by Id
+            break;
+
+          case "need":
+            plantDatabase.NeedWater();
 
             // Water
             //    This will update the plant's LastWateredDate to the Current Time. The user will select the plant by Id

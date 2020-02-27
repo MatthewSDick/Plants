@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Linq;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Plants
 {
@@ -9,6 +10,7 @@ namespace Plants
   {
 
     public DbSet<Plant> Plants { get; set; }
+    public DbSet<Garden> Gardens { get; set; }
 
     public void ViewPlants()
     {
@@ -59,6 +61,19 @@ namespace Plants
 
       // View all the plants that have not been watered today
     }
+
+    public void NeedWater()
+    {
+      Console.Clear();
+
+      var notWateredToday = Plants.Where(p => DateTime.Compare(DateTime.Now, p.LastWateredDate) > p.WaterFrequency);
+      foreach (var plant in notWateredToday)
+      {
+        Console.WriteLine($"{plant.Species} needs watered.");
+      }
+
+      // View all the plants that have not been watered today
+    }
     public void ShowByLocation(string theLocation)
     {
       var plantLocation = Plants.Where(p => p.LocatedPlanted == theLocation);
@@ -66,7 +81,7 @@ namespace Plants
       Console.WriteLine($"Here are the plants in {theLocation}.");
       foreach (var plant in plantLocation)
       {
-        Console.WriteLine($"Plant number {plant.Id} is {plant.Species} located in the {plant.LocatedPlanted} garden.");
+        Console.WriteLine($"Plant number {plant.Id} is {plant.Species}.");
       }
     }
     public void GetLocations()
